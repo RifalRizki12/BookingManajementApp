@@ -1,12 +1,20 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace API.Models;
 
+
+[Table("tb_tr_bookings")]
 public class Bookings : BaseEntity
 {
-    public DateTime StartdDate { get; set; }
-    public DateTime EnddDate { get; set; }
-    public int Status { get; set; }
-    public string Remarks { get; set; }
-    public Guid Room { get; set; }
-    public Guid Employee { get; set; }
+    [Column("start_date")] public DateTime StartdDate { get; set; }
 
+    [Column("end_date")] public DateTime EnddDate { get; set; }
+    
+    [Column("status")] public int Status { get; set; }
+
+    [Column("remarks")] public string Remarks { get; set; }
+
+    [Column("room_guid")] public Guid Room { get; set; }
+
+    [Column("employee_guid")] public Guid Employee { get; set; }
 }
