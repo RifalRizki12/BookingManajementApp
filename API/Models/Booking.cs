@@ -4,7 +4,7 @@ namespace API.Models;
 
 
 [Table("tb_tr_bookings")]
-public class Bookings : BaseEntity
+public class Booking : BaseEntity
 {
     [Column("start_date")] public DateTime StartdDate { get; set; }
 
