@@ -5,7 +5,7 @@ namespace API.Models;
 [Table("tb_m_accounts")]
 public class Account : BaseEntity
 {
-    [Column("password", TypeName = "nvarchar(50)")]
+    [Column("password", TypeName = "nvarchar(max)")]
     public string Password { get; set; }
     
     [Column("otp")]
