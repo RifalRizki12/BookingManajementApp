@@ -26,19 +26,27 @@ namespace API.Repositories
             }
         }
 
-        public bool Delete(T entity)
+        public bool Delete(Guid guid)
         {
             try
             {
-                _context.Set<T>().Remove(entity);
+                var entityToDelete = _context.Set<T>().Find(guid);
+                if (entityToDelete == null)
+                {
+                    return false; // Data tidak ditemukan, penghapusan gagal.
+                }
+
+                _context.Set<T>().Remove(entityToDelete);
                 _context.SaveChanges();
-                return true;
+                return true; // Penghapusan berhasil.
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                // Di sini Anda dapat menangani kesalahan penghapusan dengan lebih spesifik.
+                return false; // Penghapusan gagal.
             }
         }
+
 
         public IEnumerable<T> GetAll()
         {

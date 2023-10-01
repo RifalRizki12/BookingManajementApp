@@ -6,7 +6,7 @@
         T GetById(Guid guid);
         IEnumerable<T> GetAll();
         bool Update(T entity);
-        bool Delete(T entity);
+        bool Delete(Guid guid);
     }
 
 }

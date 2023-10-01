@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "K23plnLVh7ucIb6mlGOVJn/m2rJCU1/iKtNTzBM8gW9OniFCi5BISPDR0SHcYZzlgo6pYDZXvCXqAlWtMlBDFQ==",
+  "dgSpecHash": "l/sSLAhpe3GCrd9uxGQ+m2ZvoPgHWCeeleHkK96KUkqYiidD7DsuMZdzsffmmnRAXU24wneU3voPo0YqAV4/XQ==",
   "success": true,
   "projectFilePath": "D:\\Programer\\C#_Metrodata\\BookingManajementApp\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rizky\\.nuget\\packages\\fluentassertions\\6.12.0\\fluentassertions.6.12.0.nupkg.sha512",
     "C:\\Users\\rizky\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rizky\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\rizky\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

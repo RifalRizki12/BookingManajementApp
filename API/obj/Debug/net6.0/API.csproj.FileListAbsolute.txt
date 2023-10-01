@@ -5,6 +5,7 @@ D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\API.deps.jso
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\API.runtimeconfig.json
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\API.dll
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\API.pdb
+D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\FluentAssertions.dll
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\Humanizer.dll
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\Programer\C#_Metrodata\BookingManajementApp\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll

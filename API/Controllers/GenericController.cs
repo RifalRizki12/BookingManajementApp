@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/generic/[controller]")]
     public class GenericController<T> : ControllerBase where T : class
     {
         private readonly IRepository<T> _repository;
@@ -69,16 +69,17 @@ namespace API.Controllers
 
             var result = _repository.Update(existingEntity);
 
-            if (result == null)
+            if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(result);
+            return NoContent(); // Kode status 204 No Content untuk sukses pembaruan tanpa respons.
         }
 
+
         [HttpDelete("{guid}")]
-        public IActionResult Delete(T guid)
+        public IActionResult Delete(Guid guid)
         {
             var deleted = _repository.Delete(guid);
 
@@ -89,6 +90,7 @@ namespace API.Controllers
 
             return NoContent(); // Kode status 204 No Content untuk sukses penghapusan tanpa respons.
         }
+
     }
 
 }
