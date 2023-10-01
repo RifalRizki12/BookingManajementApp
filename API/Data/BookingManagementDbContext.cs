@@ -16,5 +16,54 @@ public class BookingManagementDbContext : DbContext
     public DbSet<Room> Rooms { get; set; }
     public DbSet<University> Universities { get; set; }
     
-    
+    //pembutan method overrid untuk atribut uniq
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Employee>().HasIndex(e => new
+        {
+            e.Nik,
+            e.Email,
+            e.PhoneNumber
+        }).IsUnique();
+
+        // One University has many Educations
+        modelBuilder.Entity<University>()
+            .HasMany(e => e.Educations)
+            .WithOne(u => u.University)
+            .HasForeignKey(e => e.UniversityGuid);
+
+        // one Education has one employee
+        modelBuilder.Entity<Education>()
+            .HasOne(em => em.Employee)
+            .WithOne(ed => ed.Education)
+            .HasForeignKey<Education>(ed => ed.Guid);
+
+        modelBuilder.Entity<Employee>()
+            .HasMany(b => b.Bookings)
+            .WithOne(e => e.Employee)
+            .HasForeignKey(e => e.EmployeeGuid);
+
+        modelBuilder.Entity<Booking>()
+            .HasOne(r => r.Room)
+            .WithMany(b => b.Bookings)
+            .HasForeignKey(b => b.RoomGuid);
+
+        modelBuilder.Entity<Employee>()
+            .HasOne(a => a.Account)
+            .WithOne(e => e.Employee)
+            .HasForeignKey<Account>(a => a.Guid);
+
+        modelBuilder.Entity<Account>()
+            .HasMany(ar => ar.AccountRoles)
+            .WithOne(e => e.Account)
+            .HasForeignKey(ar => ar.AccountGuid);
+
+        modelBuilder.Entity<AccountRole>()
+            .HasOne(r => r.Role)
+            .WithMany(ar => ar.AccountRoles)
+            .HasForeignKey(ar => ar.RoleGuid);
+
+    }
 }
