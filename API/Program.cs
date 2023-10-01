@@ -12,7 +12,7 @@ builder.Services.AddDbContext<BookingManagementDbContext>(option => option.UseSq
 
 // Add repositories to the container.
 //builder.Services.AddScoped(typeof(IRepository<University>), typeof(Repository<University>));
-//builder.Services.AddScoped(typeof(IRepository<AccountRole>), typeof(Repository<AccountRole>));
+builder.Services.AddScoped(typeof(IRepository<AccountRole>), typeof(Repository<AccountRole>));
 /*builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountRoleRepository, AccountRoleRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
@@ -20,7 +20,7 @@ builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();*/
-builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
+//builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

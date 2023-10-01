@@ -78,7 +78,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{guid}")]
-        public IActionResult Delete(Guid guid)
+        public IActionResult Delete(T guid)
         {
             var deleted = _repository.Delete(guid);
 
