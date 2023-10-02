@@ -79,7 +79,6 @@ namespace API.Controllers
         }
 
 
-
         [HttpDelete("{guid}")]
         public IActionResult Delete(Guid guid)
         {

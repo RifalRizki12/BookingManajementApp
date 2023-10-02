@@ -26,7 +26,9 @@ namespace API.DTOs.Employees
                 Gender = dto.Gender,
                 HiringDate = dto.HiringDate,
                 Email = dto.Email,
-                PhoneNumber = dto.PhoneNumber
+                PhoneNumber = dto.PhoneNumber,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
             };
         }
     }

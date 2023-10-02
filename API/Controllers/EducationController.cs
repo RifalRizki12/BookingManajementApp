@@ -1,5 +1,8 @@
 ﻿using API.Contracts;
+using API.DTOs.Educations;
+using API.DTOs.Employees;
 using API.Models;
+using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -25,6 +28,7 @@ namespace API.Controllers
                 return NotFound("Data Not Found");
             }
 
+            var data = result.Select(x => (EducationDto)x);
             return Ok(result);
         }
 
@@ -40,48 +44,39 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Education education)
+        public IActionResult Create(CreateEducationDto educationDto)
         {
-            var result = _educationRepository.Create(education);
+            var result = _educationRepository.Create(educationDto);
             if (result is null)
             {
                 return BadRequest("Failed to create data");
             }
 
-            return Ok(result);
+            return Ok((EducationDto)result);
         }
 
-        [HttpPut("{guid}")]
-        public IActionResult Update(Guid guid, [FromBody] Education updatedEducation)
+        [HttpPut]
+        public IActionResult Update(EducationDto educationDto)
         {
-            if (updatedEducation == null)
+
+            var existingEmployee = _educationRepository.GetByGuid(educationDto.Guid);
+
+            if (existingEmployee == null)
             {
-                return BadRequest("Invalid data");
+                return NotFound("Employee not found");
             }
 
-            var existingEducation = _educationRepository.GetByGuid(guid);
+            Education toUpdate = educationDto;
+            toUpdate.CreatedDate = existingEmployee.CreatedDate;
 
-            if (existingEducation == null)
-            {
-                return NotFound("Education not found");
-            }
-
-            // Lakukan pembaruan data berdasarkan updatedEducation
-            existingEducation.Major = updatedEducation.Major;
-            existingEducation.Degree = updatedEducation.Degree;
-            existingEducation.Gpa = updatedEducation.Gpa;
-            existingEducation.UniversityGuid = updatedEducation.UniversityGuid;
-
-            var result = _educationRepository.Update(existingEducation);
-
+            var result = _educationRepository.Update(toUpdate);
             if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(existingEducation); // Anda bisa mengembalikan existingEducation yang telah diperbarui jika diperlukan.
+            return Ok("Data Updated");
         }
-
 
 
         [HttpDelete("{guid}")]
