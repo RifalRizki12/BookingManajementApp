@@ -1,4 +1,6 @@
 ﻿using API.Contracts;
+using API.DTOs.Univers;
+using API.DTOs.Universites;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +26,7 @@ namespace API.Controllers
                 return NotFound("Data Not Found");
             }
 
+            var data = result.Select(x => (UniversityDto)x);
             return Ok(result);
         }
 
@@ -39,44 +42,36 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(University university)
+        public IActionResult Create(CreateUniversityDto universityDto)
         {
-            var result = _universityRepository.Create(university);
+            var result = _universityRepository.Create(universityDto);
             if (result is null)
             {
                 return BadRequest("Failed to create data");
             }
 
-            return Ok(result);
+            return Ok((UniversityDto)result);
         }
 
-        [HttpPut("{guid}")]
-        public IActionResult Update(Guid guid, [FromBody] University updatedUniversity)
+        [HttpPut]
+        public IActionResult Update(UniversityDto universityDto)
         {
-            if (updatedUniversity == null)
+            var entity = _universityRepository.GetByGuid(universityDto.Guid);
+            if (entity is null)
             {
-                return BadRequest("Invalid data");
+                return NotFound("Id Not Found");
             }
 
-            var existingUniversity = _universityRepository.GetByGuid(guid);
+            University toUpdate = universityDto;
+            toUpdate.CreatedDate = entity.CreatedDate;
 
-            if (existingUniversity == null)
-            {
-                return NotFound("University not found");
-            }
-
-            // Lakukan pembaruan data berdasarkan updatedUniversity
-            existingUniversity.Code = updatedUniversity.Code;
-            existingUniversity.Name = updatedUniversity.Name;
-
-            var result = _universityRepository.Update(existingUniversity);
-
-            if (result == null)
+            var result = _universityRepository.Update(toUpdate);
+            if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(result);
+            return Ok("Data Updated");
         }
 
 

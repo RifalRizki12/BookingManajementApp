@@ -1,5 +1,8 @@
 ﻿using API.Contracts;
+using API.DTOs.AccountRoles;
+using API.DTOs.Employees;
 using API.Models;
+using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -25,6 +28,7 @@ namespace API.Controllers
                 return NotFound("Data Not Found");
             }
 
+            var data = result.Select(x => (AccountRoleDto)x);
             return Ok(result);
         }
 
@@ -40,43 +44,38 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AccountRole account)
+        public IActionResult Create(CreateAccountRoleDto accountRoleDto)
         {
-            var result = _accountRepository.Create(account);
+            var result = _accountRepository.Create(accountRoleDto);
             if (result is null)
             {
                 return BadRequest("Failed to create data");
             }
 
-            return Ok(result);
+            return Ok((AccountRoleDto)result);
         }
 
         [HttpPut("{guid}")]
-        public IActionResult Update(Guid guid, [FromBody] AccountRole updatedAccount)
+        public IActionResult Update(AccountRoleDto accountRoleDto)
         {
-            if (updatedAccount == null)
+
+            var existingEmployee = _accountRepository.GetByGuid(accountRoleDto.Guid);
+
+            if (existingEmployee == null)
             {
-                return BadRequest("Invalid data");
+                return NotFound("Employee not found");
             }
 
-            var existingAccount = _accountRepository.GetByGuid(guid);
+            AccountRole toUpdate = accountRoleDto;
+            toUpdate.CreatedDate = existingEmployee.CreatedDate;
 
-            if (existingAccount == null)
-            {
-                return NotFound("Account not found");
-            }
-
-            // Lakukan pembaruan data berdasarkan updatedAccount
-            existingAccount.RoleGuid = updatedAccount.RoleGuid;
-
-            var result = _accountRepository.Update(existingAccount);
-
+            var result = _accountRepository.Update(toUpdate);
             if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(existingAccount); // Anda bisa mengembalikan existingAccount yang telah diperbarui jika diperlukan.
+            return Ok("Data Updated");
         }
 
 
