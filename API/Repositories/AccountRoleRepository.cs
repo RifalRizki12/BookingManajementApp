@@ -4,65 +4,10 @@ using API.Models;
 
 namespace API.Repositories
 {
-    public class AccountRoleRepository : IAccountRoleRepository
+    public class AccountRoleRepository : GeneralRepository<AccountRole>, IAccountRoleRepository
     {
-        private readonly BookingManagementDbContext _context;
-
-        public AccountRoleRepository(BookingManagementDbContext context)
+        protected AccountRoleRepository(BookingManagementDbContext context) : base(context)
         {
-            _context = context;
-        }
-
-        public AccountRole? Create(AccountRole accountRole)
-        {
-            try
-            {
-                _context.Set<AccountRole>().Add(accountRole);
-                _context.SaveChanges();
-                return accountRole;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public bool Delete(AccountRole accountRole)
-        {
-            try
-            {
-                _context.Set<AccountRole>().Remove(accountRole);
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public IEnumerable<AccountRole> GetAll()
-        {
-            return _context.Set<AccountRole>().ToList();
-        }
-
-        public AccountRole? GetByGuid(Guid guid)
-        {
-            return _context.Set<AccountRole>().Find(guid);
-        }
-
-        public bool Update(AccountRole accountRole)
-        {
-            try
-            {
-                _context.Set<AccountRole>().Update(accountRole);
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }
