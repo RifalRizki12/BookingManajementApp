@@ -6,7 +6,7 @@ namespace API.Repositories
 {
     public class RoleRepository : GeneralRepository<Role>, IRoleRepository
     {
-        protected RoleRepository(BookingManagementDbContext context) : base(context)
+        public RoleRepository(BookingManagementDbContext context) : base(context)
         {
         }
     }

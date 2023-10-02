@@ -6,7 +6,7 @@ namespace API.Repositories
 {
     public class RoomRepository : GeneralRepository<Room>, IRoomRepository
     {
-        protected RoomRepository(BookingManagementDbContext context) : base(context)
+        public RoomRepository(BookingManagementDbContext context) : base(context)
         {
         }
     }
