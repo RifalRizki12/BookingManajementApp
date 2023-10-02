@@ -9,6 +9,6 @@ public class Role : BaseEntity
     public string Name { get; set; }
 
     //Kardinalitas
-    public ICollection<AccountRole> AccountRoles { get; set; }
+    public ICollection<AccountRole>? AccountRoles { get; set; }
 
 }

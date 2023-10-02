@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class createdatabase : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,7 +95,7 @@ namespace API.Migrations
                         column: x => x.guid,
                         principalTable: "tb_m_employees",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,13 +120,13 @@ namespace API.Migrations
                         column: x => x.employee_guid,
                         principalTable: "tb_m_employees",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_tb_tr_bookings_tb_m_rooms_room_guid",
                         column: x => x.room_guid,
                         principalTable: "tb_m_rooms",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,13 +149,13 @@ namespace API.Migrations
                         column: x => x.guid,
                         principalTable: "tb_m_employees",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_tb_m_educations_tb_m_universities_university_guid",
                         column: x => x.university_guid,
                         principalTable: "tb_m_universities",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,13 +176,13 @@ namespace API.Migrations
                         column: x => x.account_guid,
                         principalTable: "tb_m_accounts",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_tb_m_account_roles_tb_m_roles_role_guid",
                         column: x => x.role_guid,
                         principalTable: "tb_m_roles",
                         principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(BookingManagementDbContext))]
-    [Migration("20230929033817_create-database")]
-    partial class createdatabase
+    [Migration("20231002033119_Create-Database")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,7 +332,7 @@ namespace API.Migrations
                     b.HasOne("API.Models.Employee", "Employee")
                         .WithOne("Account")
                         .HasForeignKey("API.Models.Account", "Guid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Employee");
@@ -343,13 +343,13 @@ namespace API.Migrations
                     b.HasOne("API.Models.Account", "Account")
                         .WithMany("AccountRoles")
                         .HasForeignKey("AccountGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("API.Models.Role", "Role")
                         .WithMany("AccountRoles")
                         .HasForeignKey("RoleGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Account");
@@ -362,13 +362,13 @@ namespace API.Migrations
                     b.HasOne("API.Models.Employee", "Employee")
                         .WithMany("Bookings")
                         .HasForeignKey("EmployeeGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("API.Models.Room", "Room")
                         .WithMany("Bookings")
                         .HasForeignKey("RoomGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Employee");
@@ -381,13 +381,13 @@ namespace API.Migrations
                     b.HasOne("API.Models.Employee", "Employee")
                         .WithOne("Education")
                         .HasForeignKey("API.Models.Education", "Guid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("API.Models.University", "University")
                         .WithMany("Educations")
                         .HasForeignKey("UniversityGuid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Employee");

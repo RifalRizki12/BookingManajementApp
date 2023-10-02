@@ -19,6 +19,6 @@ public class Account : BaseEntity
 
     //kardinalitas
     public Employee? Employee { get; set; }
-    public ICollection<AccountRole> AccountRoles { get; set; }
+    public ICollection<AccountRole>? AccountRoles { get; set; }
 
 }

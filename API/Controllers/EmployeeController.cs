@@ -40,9 +40,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create([FromBody] Employee employee)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = _employeeRepository.Create(employee);
+
             if (result is null)
             {
                 return BadRequest("Failed to create data");
