@@ -1,4 +1,5 @@
 ﻿using API.Contracts;
+using API.DTOs.Roles;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public IActionResult GetAll()
         {
             var result = _roleRepository.GetAll();
@@ -25,7 +27,9 @@ namespace API.Controllers
                 return NotFound("Data Not Found");
             }
 
-            return Ok(result);
+            var data = result.Select(x => (RoleDto)x);
+
+            return Ok(data);
         }
 
         [HttpGet("{guid}")]
@@ -36,50 +40,42 @@ namespace API.Controllers
             {
                 return NotFound("Id Not Found");
             }
-            return Ok(result);
+            return Ok((RoleDto)result);
         }
 
         [HttpPost]
-        public IActionResult Create(Role role)
+        public IActionResult Create(CreateRoleDto roleDto)
         {
-            var result = _roleRepository.Create(role);
+            var result = _roleRepository.Create(roleDto);
             if (result is null)
             {
                 return BadRequest("Failed to create data");
             }
 
-            return Ok(result);
+            return Ok((RoleDto)result);
         }
 
-        [HttpPut("{guid}")]
-        public IActionResult Update(Guid guid, [FromBody] Role updatedRole)
+        [HttpPut]
+        public IActionResult Update(RoleDto roleDto)
         {
-            if (updatedRole == null)
+            var entity = _roleRepository.GetByGuid(roleDto.Guid);
+            if (entity is null)
             {
-                return BadRequest("Invalid data");
+                return NotFound("Id Not Found");
             }
 
-            var existingRole = _roleRepository.GetByGuid(guid);
+            Role toUpdate = roleDto;
+            toUpdate.CreatedDate = entity.CreatedDate;
 
-            if (existingRole == null)
-            {
-                return NotFound("Role not found");
-            }
-
-            // Lakukan pembaruan data berdasarkan updatedRole
-            existingRole.Name = updatedRole.Name;
-
-            var result = _roleRepository.Update(existingRole);
-
+            var result = _roleRepository.Update(toUpdate);
             if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(existingRole); // Anda bisa mengembalikan existingRole yang telah diperbarui jika diperlukan.
+            return Ok("Data Updated");
+
         }
-
-
 
         [HttpDelete("{guid}")]
         public IActionResult Delete(Guid guid)

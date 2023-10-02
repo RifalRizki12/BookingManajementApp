@@ -1,4 +1,5 @@
 ﻿using API.Contracts;
+using API.DTOs.Accounts;
 using API.DTOs.Employees;
 using API.DTOs.Univers;
 using API.Models;
@@ -40,11 +41,11 @@ namespace API.Controllers
             {
                 return NotFound("Id Not Found");
             }
-            return Ok(result);
+            return Ok((EmployeeDto)result);
         }
 
         [HttpPost]
-        public IActionResult Create(CreatedEmployeeDto employeeDto)
+        public IActionResult Create(CreateEmployeeDto employeeDto)
         {
             var result = _employeeRepository.Create(employeeDto);
             if (result is null)
@@ -55,7 +56,7 @@ namespace API.Controllers
             return Ok((EmployeeDto)result);
         }
 
-        [HttpPut("{guid}")]
+        [HttpPut]
         public IActionResult Update(EmployeeDto employeeDto)
         {
 

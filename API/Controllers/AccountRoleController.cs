@@ -1,8 +1,7 @@
 ﻿using API.Contracts;
 using API.DTOs.AccountRoles;
-using API.DTOs.Employees;
+using API.DTOs.Accounts;
 using API.Models;
-using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -40,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound("Id Not Found");
             }
-            return Ok(result);
+            return Ok((AccountRoleDto)result);
         }
 
         [HttpPost]
@@ -55,7 +54,7 @@ namespace API.Controllers
             return Ok((AccountRoleDto)result);
         }
 
-        [HttpPut("{guid}")]
+        [HttpPut]
         public IActionResult Update(AccountRoleDto accountRoleDto)
         {
 

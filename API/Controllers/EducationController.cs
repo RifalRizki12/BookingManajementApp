@@ -9,12 +9,12 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EducataionController : ControllerBase
+    public class EducationController : ControllerBase
     {
 
         private readonly IEducationRepository _educationRepository;
 
-        public EducataionController(IEducationRepository educationRepository)
+        public EducationController(IEducationRepository educationRepository)
         {
             _educationRepository = educationRepository;
         }

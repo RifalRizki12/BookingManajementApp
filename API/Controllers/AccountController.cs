@@ -1,4 +1,5 @@
 ﻿using API.Contracts;
+using API.DTOs.Accounts;
 using API.Models;
 using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,9 @@ namespace API.Controllers
                 return NotFound("Data Not Found");
             }
 
-            return Ok(result);
+            var data = result.Select(x => (AccountDto)x);
+
+            return Ok(data);
         }
 
         [HttpGet("{guid}")]
@@ -37,53 +40,42 @@ namespace API.Controllers
             {
                 return NotFound("Id Not Found");
             }
-            return Ok(result);
+            return Ok((AccountDto)result);
         }
 
         [HttpPost]
-        public IActionResult Create(Account account)
+        public IActionResult Create(CreateAccountDto accountDto)
         {
-            var result = _accountRepository.Create(account);
+            var result = _accountRepository.Create(accountDto);
             if (result is null)
             {
                 return BadRequest("Failed to create data");
             }
 
-            return Ok(result);
+            return Ok((AccountDto)result);
         }
 
-        [HttpPut("{guid}")]
-        public IActionResult Update(Guid guid, [FromBody] Account updatedAccount)
+        [HttpPut]
+        public IActionResult Update(AccountDto accountDto)
         {
-            if (updatedAccount == null)
+            var entity = _accountRepository.GetByGuid(accountDto.Guid);
+            if (entity is null)
             {
-                return BadRequest("Invalid data");
+                return NotFound("Id Not Found");
             }
 
-            var existingAccount = _accountRepository.GetByGuid(guid);
+            Account toUpdate = accountDto;
+            toUpdate.CreatedDate = entity.CreatedDate;
 
-            if (existingAccount == null)
-            {
-                return NotFound("Account not found");
-            }
-
-            // Lakukan pembaruan data berdasarkan updatedAccount
-            existingAccount.Password = updatedAccount.Password;
-            existingAccount.Otp = updatedAccount.Otp;
-            existingAccount.IsUsed = updatedAccount.IsUsed;
-            existingAccount.ExpiredTime = updatedAccount.ExpiredTime;
-
-            var result = _accountRepository.Update(existingAccount);
-
+            var result = _accountRepository.Update(toUpdate);
             if (!result)
             {
                 return BadRequest("Failed to update data");
             }
 
-            return Ok(existingAccount); // Anda bisa mengembalikan existingAccount yang telah diperbarui jika diperlukan.
+            return Ok("Data Updated");
+
         }
-
-
 
         [HttpDelete("{guid}")]
         public IActionResult Delete(Guid guid)
