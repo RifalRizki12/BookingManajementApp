@@ -24,6 +24,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DTOs\University\" />
+    </ItemGroup>
+
 
 
 
