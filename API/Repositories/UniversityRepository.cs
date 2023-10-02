@@ -1,10 +1,14 @@
 ﻿using API.Contracts;
 using API.Data;
 using API.Models;
-
-namespace API.Repositories;
+using API.Repositories;
 
 public class UniversityRepository : GeneralRepository<University>, IUniversityRepository
 {
-    public UniversityRepository(BookingManagementDbContext context) : base(context) { }
+    public UniversityRepository(BookingManagementDbContext context) : base(context)
+    {
+        // Konstruktor UniversityRepository menerima instance BookingManagementDbContext
+        // dan meneruskannya ke konstruktor base class GeneralRepository<University>.
+        // Ini dilakukan untuk menginisialisasi repositori University dengan DbContext yang benar.
+    }
 }

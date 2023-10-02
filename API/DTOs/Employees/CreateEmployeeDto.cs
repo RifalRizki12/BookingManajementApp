@@ -2,7 +2,7 @@
 
 namespace API.DTOs.Employees
 {
-    public class CreatedEmployeeDto
+    public class CreateEmployeeDto
     {
         public string Nik { get; set; }
         public string FirstName { get; set; }
@@ -15,10 +15,14 @@ namespace API.DTOs.Employees
 
         // Konversi Implisit (Implicit Conversion):
         // Metode ini akan mengonversi EmployeeDto ke Employee secara implisit jika diperlukan.
-        public static implicit operator Employee(CreatedEmployeeDto dto)
+        public static implicit operator Employee(CreateEmployeeDto dto)
         {
+            // Dalam metode ini, menginisialisasi objek Employee
+            // menggunakan nilai-nilai dari objek CreateEmployeeDto yang sesuai.
             return new Employee
             {
+                // Properti seperti Nik dari objek Employee diisi dengan nilai dari beberapa properti
+                // dari objek CreateEmployeeDto (dto.Nik).
                 Nik = dto.Nik,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,

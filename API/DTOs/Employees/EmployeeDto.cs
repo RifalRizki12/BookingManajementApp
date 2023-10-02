@@ -20,15 +20,15 @@ namespace API.DTOs.Employees
         {
             return new EmployeeDto
             {
-                Guid = employee.Guid,
-                Nik = employee.Nik,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                BirthDate = employee.BirthDate,
-                Gender = employee.Gender,
-                HiringDate = employee.HiringDate,
-                Email = employee.Email,
-                PhoneNumber = employee.PhoneNumber
+                Guid = employee.Guid,               // Mengonversi GUID dari Employee ke EmployeeDto.
+                Nik = employee.Nik,                 // Mengonversi NIK dari Employee ke EmployeeDto.
+                FirstName = employee.FirstName,     // Mengonversi Nama Depan dari Employee ke EmployeeDto.
+                LastName = employee.LastName,       // Mengonversi Nama Belakang dari Employee ke EmployeeDto.
+                BirthDate = employee.BirthDate,     // Mengonversi Tanggal Lahir dari Employee ke EmployeeDto.
+                Gender = employee.Gender,           // Mengonversi Jenis Kelamin dari Employee ke EmployeeDto.
+                HiringDate = employee.HiringDate,   // Mengonversi Tanggal Mulai Bekerja dari Employee ke EmployeeDto.
+                Email = employee.Email,             // Mengonversi Email dari Employee ke EmployeeDto.
+                PhoneNumber = employee.PhoneNumber  // Mengonversi Nomor Telepon dari Employee ke EmployeeDto.
             };
         }
 
@@ -38,15 +38,16 @@ namespace API.DTOs.Employees
         {
             return new Employee
             {
-                Guid = dto.Guid,
-                Nik = dto.Nik,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                BirthDate = dto.BirthDate,
-                Gender = dto.Gender,
-                HiringDate = dto.HiringDate,
-                Email = dto.Email,
-                PhoneNumber = dto.PhoneNumber
+                Guid = dto.Guid,                // Mengonversi GUID dari EmployeeDto ke Employee.
+                Nik = dto.Nik,                  // Mengonversi NIK dari EmployeeDto ke Employee.
+                FirstName = dto.FirstName,      // Mengonversi Nama Depan dari EmployeeDto ke Employee.
+                LastName = dto.LastName,        // Mengonversi Nama Belakang dari EmployeeDto ke Employee.
+                BirthDate = dto.BirthDate,      // Mengonversi Tanggal Lahir dari EmployeeDto ke Employee.
+                Gender = dto.Gender,            // Mengonversi Jenis Kelamin dari EmployeeDto ke Employee.
+                HiringDate = dto.HiringDate,    // Mengonversi Tanggal Mulai Bekerja dari EmployeeDto ke Employee.
+                Email = dto.Email,              // Mengonversi Email dari EmployeeDto ke Employee.
+                PhoneNumber = dto.PhoneNumber,   // Mengonversi Nomor Telepon dari EmployeeDto ke Employee.
+                ModifiedDate = DateTime.Now
             };
         }
     }

@@ -29,7 +29,8 @@ namespace API.DTOs.AccountRoles
             {
                 Guid = dto.Guid,
                 AccountGuid = dto.AccountGuid,
-                RoleGuid = dto.RoleGuid
+                RoleGuid = dto.RoleGuid,
+                ModifiedDate = DateTime.Now
             };
         }
     }
