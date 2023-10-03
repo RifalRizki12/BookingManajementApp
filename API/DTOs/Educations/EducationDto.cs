@@ -1,37 +1,40 @@
-﻿using API.DTOs.Universites;
-using API.Models;
+﻿using API.Models; // Mengimpor namespace yang diperlukan.
 
-namespace API.DTOs.Educations;
-public class EducationDto
+namespace API.DTOs.Educations
 {
-    public Guid Guid { get; set; }
-    public string Major { get; set; }
-    public string Degree { get; set; }
-    public float Gpa { get; set; }
-    public Guid UniversityGuid { get; set; }
-
-    public static explicit operator EducationDto(Education education)
+    public class EducationDto
     {
-        return new EducationDto
-        {
-            Guid = education.Guid,
-            Major = education.Major,
-            Degree = education.Degree,
-            Gpa = education.Gpa,
-            UniversityGuid = education.UniversityGuid
-        };
-    }
+        public Guid Guid { get; set; } // Properti yang menyimpan GUID (identifikasi unik) dari entitas Education.
+        public string Major { get; set; } 
+        public string Degree { get; set; } 
+        public float Gpa { get; set; } 
+        public Guid UniversityGuid { get; set; } // Properti yang menyimpan GUID universitas terkait.
 
-    public static implicit operator Education(EducationDto educationDto)
-    {
-        return new Education
+        // Operator eksplisit untuk mengonversi dari entitas Education ke EducationDto.
+        public static explicit operator EducationDto(Education education)
         {
-            Guid = educationDto.Guid,
-            Major = educationDto.Major,
-            Degree = educationDto.Degree,
-            Gpa = educationDto.Gpa,
-            UniversityGuid = educationDto.UniversityGuid,
-            ModifiedDate = DateTime.Now
-        };
+            return new EducationDto
+            {
+                Guid = education.Guid, // Mengisi properti Guid dengan nilai dari entitas Education.
+                Major = education.Major, 
+                Degree = education.Degree, 
+                Gpa = education.Gpa, 
+                UniversityGuid = education.UniversityGuid
+            };
+        }
+
+        // Operator implisit untuk mengonversi dari EducationDto ke entitas Education.
+        public static implicit operator Education(EducationDto educationDto)
+        {
+            return new Education
+            {
+                Guid = educationDto.Guid, // Mengisi properti Guid dengan nilai dari EducationDto.
+                Major = educationDto.Major, 
+                Degree = educationDto.Degree, 
+                Gpa = educationDto.Gpa, 
+                UniversityGuid = educationDto.UniversityGuid, 
+                ModifiedDate = DateTime.Now 
+            };
+        }
     }
 }
